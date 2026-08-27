@@ -4,12 +4,23 @@ const express=require('express');
 
 const app=express();
 
-app.use("/hello",(req,res)=>{
-    res.send("hello hello hello hello");
-})
+let user={ firstname:'Akshay', lastname:'saini'};
 
-app.use("/test",(req,res)=>{
-    res.send("hhhhhhelloooooooooooo from the test (request handler)");
+app.get("/user",(req,res)=>{
+    res.send({firstname:"Akshay",lastname:"Saini"});
+});
+
+app.post("/user",(req,res)=>{
+    res.send("data successfully saved to database!");
+});
+
+app.delete("/user",(req,res)=>{
+    res.send("data successfully deleted from database")
+});
+
+
+app.patch("/user",(req,res)=>{
+    res.send({})
 })
 app.listen(7777,()=>{
     console.log("server is successfully listening on port 7777...");
