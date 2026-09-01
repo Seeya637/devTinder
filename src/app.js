@@ -1,24 +1,24 @@
 const express=require('express');
+const { adminAuth,userAuth } = require('./middlewares/auth');
 
 const app=express();
 
-app.get('/user',(req,res,next)=>{
-    console.log("handling the route user!");
-    next();
-    // res.send("response");
-},
-(req,res,next)=>{
-    console.log("handling the route user 2");
-    next();
-    // res.send("2 nd response");
-},
-(req,res,next)=>{
-    console.log("handling the route user 3");
-     res.send("final response");
-     next();
-}
-)
+app.use("/admin",adminAuth);
+app.get("/user/login",(req,res)=>{
+    res.send("user logged in successfully");
+})
+app.get("/user",userAuth,(req,res)=>{
+    res.send("user data sent");
+});
 
-app.listen('7777',()=>{
+app.get("/admin/getAllData",(req,res)=>{
+    res.send("all data sent");
+});
+
+app.get("/admin/deleteAllUser",(req,res)=>{
+    res.send("delete the user");
+});
+
+app.listen(7777,()=>{
         console.log('server is running on port number 7777');
 });
